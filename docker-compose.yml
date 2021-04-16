@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  prom:
+  prometheus:
     build: ./prometheus/.
     ports:
     - "9090:9090"
