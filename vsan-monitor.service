@@ -1,0 +1,15 @@
+[Unit]
+Description=vSAN Monitor
+After=docker.service systemd-networkd.service systemd-resolved.service
+Requires=docker.service
+Documentation=https://github.com/rumart/vsan-prometheus-docker
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5
+ExecStart=/usr/local/bin/docker-compose -f /root/vsan-prometheus/docker-compose.yml up
+ExecStop=/usr/local/bin/docker-compose -f /root/vsan-prometheus/docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target
