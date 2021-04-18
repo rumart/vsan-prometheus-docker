@@ -8,7 +8,7 @@ printf "\nRunning update"
 printf "\n**************\n"
 cd /etc/yum.repos.d/
 sed  -i 's/dl.bintray.com\/vmware/packages.vmware.com\/photon\/$releasever/g' photon.repo photon-updates.repo photon-extras.repo photon-debuginfo.repo
-tdnf update -y
+#tdnf update -y
 printf "\n**************"
 printf "\nInstalling required stuff"
 printf "\n**************"
