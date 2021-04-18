@@ -31,3 +31,4 @@ This repo will help you set up a solution for monitoring a vSAN cluster with Pro
 ## Roadmap
 
 - Include default dashboards
+- Run as service to survive reboots
