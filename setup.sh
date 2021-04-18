@@ -1,5 +1,36 @@
 #!/bin/bash
-printf "*****************************************"
+printf "\n"
+printf "\nNOTE! A working installation of both docker and docker-compose is required for this solution to work!"
+printf "\n"
+printf "\n"
+printf "\n**************"
+printf "\nRunning update"
+printf "\n**************\n"
+cd /etc/yum.repos.d/
+sed  -i 's/dl.bintray.com\/vmware/packages.vmware.com\/photon\/$releasever/g' photon.repo photon-updates.repo photon-extras.repo photon-debuginfo.repo
+tdnf update -y
+printf "\n**************"
+printf "\nInstalling required stuff"
+printf "\n**************"
+tdnf install -y git
+curl -s -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+printf "\n************"
+printf "\nCheck docker"
+printf "\n************"
+SRV_STATUS=$(systemctl is-active docker)
+echo $SRV_STATUS
+if [ "$SRV_STATUS" = "active" ]; then
+  printf "\nDocker is running, continuing"
+else
+  printf "\nDocker is NOT running. Cannot continue"
+  printf "\nFix the problem (try a reboot) and run the script again\n"
+  exit
+fi
+printf "\n"
+
+printf "\n*****************************************"
 printf "\nPlease provide info about the environment"
 printf "\n*****************************************"
 printf "\n"
