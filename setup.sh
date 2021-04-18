@@ -76,6 +76,9 @@ chmod 644 prometheus/prometheus.yml
 mkdir -p grafana/datasources
 curl -s -o grafana/datasources/datasources.yaml https://raw.githubusercontent.com/rumart/vsan-prometheus-docker/main/grafana-datasources.yaml
 
+curl -s -o /etc/systemd/system/vsan-monitor.service https://raw.githubusercontent.com/rumart/vsan-prometheus-docker/main/vsan-monitor.service
+systemctl daemon-reload
+
 printf "\n********************"
 printf "\nGenerating env files"
 printf "\n********************"
@@ -99,9 +102,15 @@ printf "\n********************"
 #iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 #iptables -A INPUT -p tcp --dport 9090 -j ACCEPT
 
+
+
 printf "\n"
 printf "Script finished! You can start your vSAN monitoring by running:\n"
 printf '\e[1;32m%-6s\e[m' "cd /root/vsan-prometheus"
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "docker-compose up"
+printf "\nOr you can run the following to run this as a service"
+printf '\e[1;32m%-6s\e[m' "systemctl enable vsan-monitor"
+printf "\n"
+printf '\e[1;32m%-6s\e[m' "systemctl start vsan-monitor"
 printf "\nEnjoy!\n"
