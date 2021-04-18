@@ -4,7 +4,9 @@ This repo will help you set up a solution for monitoring a vSAN cluster with Pro
 
 **The scripts are currently tested ONLY against a Photon OS 3 VM and a vSAN cluster running on vSphere 7.0 U1**
 
-## Get started
+## Instructions
+
+### Get things set up
 
 - Deploy a Photon OS 3 VM
 - Copy the setup.sh script to the VM
@@ -15,12 +17,18 @@ This repo will help you set up a solution for monitoring a vSAN cluster with Pro
   - Cluster name
   - Username/password
 
-## Startup
+### Startup/run
 
-- cd to /root/vsan-prometheus
-- run docker-compose up
+- cd to **/root/vsan-prometheus**
+- run **docker-compose up**
 
-## Configure dashboards
+or
+
+- run **systemctl enable vsan-monitor**
+- run **systemctl start vsan-monitor**
+- verify status with **systemctl status vsan-monitor**
+
+### Configure dashboards
 
 - Open a browser to the IP of the VM and port 3000
   - The Prometheus server is available on port 9090
