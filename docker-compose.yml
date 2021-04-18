@@ -7,14 +7,18 @@ services:
     volumes:
     - /root/vsan-prometheus/vol:/vol
   prometheus:
-    build: ./prometheus/.
+    image: prom/prometheus:v2.26.0
     ports:
     - "9090:9090"
     volumes:
     - /root/vsan-prometheus/vol:/vol
+    - /prometheus
+    - /root/vsan-prometheus/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    - /root/vsan-prometheus/token_file:/etc/prometheus/token_file
   grafana:
     image: grafana/grafana:7.5.4
     ports:
     - "3000:3000"
     volumes:
     - ./grafana:/etc/grafana/provisioning
+    - /var/lib/grafana
